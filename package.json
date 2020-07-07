@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf build && cd /home/FSO/phonebook/phonebook && npm run build --prod && cp -r build /home/FSO/phonebook/backend/",
+    "build:ui": "rm -rf build && cd /home/ethan/FSO/phonebook/phonebook && npm run build --prod && cp -r build /home/ethan/FSO/phonebook/backend/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "logs:prod": "heroku logs --tail"
