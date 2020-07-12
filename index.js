@@ -20,12 +20,14 @@ const GenerateID = () => {
 }
 
 const CheckForUniqueName = (body) => {
-    foundPerson = persons.find(p => p.name === body.name)
-    if(foundPerson){
-        return true
-    }else{
-        return false
-    }
+    Person.find({name: body.name}).then(result => {
+        if(!result){
+            return false
+        }else{
+            return true
+        }
+    })
+    
 }
 
 //WebApp Requests
@@ -59,6 +61,7 @@ app.delete('/api/persons/:id', (request, response)=> {
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
+    console.log(request.body)
     
     if(!body.name){
         return response.status(400).json({
