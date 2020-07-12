@@ -12,25 +12,6 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use(express.static('build'))
 
-//Persons List
-let persons = [
-    {
-        name: "Ethan Latimer",
-        number: "0982349-58",
-        id: 1,
-    },
-    {
-        name: "Arto Hellas",
-        number: "3892740587234",
-        id: 2,
-    },
-    {
-        name: "Barry McCockiner",
-        number: "-8972345245",
-        id: 3,
-    }
-]
-
 //Other Functions 
 const GenerateID = () => {
     const maxId = persons.length > 0 ? Math.max(...persons.map(n => n.id)) : 0
