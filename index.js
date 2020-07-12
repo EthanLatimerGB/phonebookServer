@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
+require('dotenv').config()
+const Person = require('./models/person')
 
 //Parsers and Tokens
 app.use(express.json())
@@ -52,7 +54,9 @@ app.get('/info', (request, response)=>{
 })
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons)
+    Person.find({}).then(result => {
+        response.json(result)
+    })
 })
 
 app.get('/api/persons/:id', (request, response) => {
@@ -89,15 +93,14 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    const CreatePerson = {
+    const person = new Person({
         name: body.name,
-        number: body.number,
-        id: GenerateID(),
-    }
-
-    persons = persons.concat(CreatePerson)
-
-    response.json(CreatePerson)
+        number: body.number
+      })
+    
+    person.save().then(savedNote => {
+        response.json(savedNote)
+    })
 })
 
 morgan.token('type', (request, response) => {
