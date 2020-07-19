@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 require('dotenv').config()
 const Person = require('./models/person')
+const middlewares = require('./utils/middlewares')
 
 //Parsers and Tokens
 app.use(express.json())
@@ -75,21 +76,10 @@ morgan.token('type', (request) => {
     request.headers['content-type']
 })
 
-const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-}
+app.use(middlewares.unknownEndpoint)
 
-app.use(unknownEndpoint)
 
-const errorHandler = (error, request, response, next) => {
-    console.log(error.message)
-    if(error.name === 'CastError'){
-        return response.status(400).send( { error: 'Malformed ID' } )
-    }
-    next(error)
-}
-
-app.use(errorHandler)
+app.use(middlewares.errorHandler)
 
 
 

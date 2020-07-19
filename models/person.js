@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const mongoooseValidator = require('mongoose-unique-validator')
 const uniqueValidator = require('mongoose-unique-validator')
 
 mongoose.set('useCreateIndex', true)
@@ -8,13 +7,11 @@ const url = process.env.MONGOURL
 
 console.log('Connecting to MongoDB address at: ', url)
 
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
-.then(result => {
-    console.log('Successfully connected to MongoDB server')
-})
-.catch(error => {
-    console.log('Failed to connect to MongoDB server: ', error.message)
-})
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then( console.log('Successfully connected to MongoDB server') )
+    .catch(error => {
+        console.log('Failed to connect to MongoDB server: ', error.message)
+    })
 
 const personSchema = new mongoose.Schema({
     name: {
